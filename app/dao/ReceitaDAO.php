@@ -47,6 +47,17 @@
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
 
+            public function receiCategoria(){
+                $sql = "SELECT c.nome AS categoria, COALESCE(SUM(r.valor), 0)
+                AS total_receita FROM categorias c LEFT JOIN receitas r 
+                ON r.categoria_id = c.id AND r.data_receita >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+                AND r.data_receita <  DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH)
+                GROUP BY c.id, c.nome ORDER BY total_receita DESC;";
+                $stmt = $this->conn->query($sql);
+
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+
             public function listarIsoladas(){
                 $sql = "SELECT * FROM receitas WHERE recorrente = 0";
                 $stmt = $this->conn->query($sql);

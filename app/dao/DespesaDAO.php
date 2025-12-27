@@ -40,6 +40,17 @@
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
 
+            public function DespCateoria(){
+                $sql = "SELECT c.nome AS categoria, COALESCE(SUM(d.valor), 0)
+                AS total_gasto FROM cateoria c LEFT JOIN despesas d
+                ON d.categoria_id = c.id AND d.data_despesa >= DATE_FORMAT(CURDATE(), '%Y-%m-%01')
+                AND d.data_despesa < DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-%01'), INTERVAL 1 MONTH)
+                GROUP BY c.id, c.nome ORDER BY total_gasto DESC";
+                $stmt = $this->conn->query($sql);
+
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+
             public function listarRecorrentes(){
                 $sql = "SELECT * FROM despesas WHERE recorrente = 1";
                 $stmt = $this->conn->query($sql);
