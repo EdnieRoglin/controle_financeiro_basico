@@ -1,6 +1,5 @@
 <?php 
-require_once __DIR__ . "/app/models/Categoria.php";
-require_once __DIR__ . "/config/database.php";
+require_once __DIR__ . "/../models/Categoria.php";
 
     class CategoriaDAO{
         private PDO $conn;
@@ -17,6 +16,16 @@ require_once __DIR__ . "/config/database.php";
                 ':nome' => $categoria->getNome(),
                 ':tipo' => $categoria->getTipo(),
                 ':ativo' => $categoria->getAtivo()
+            ]);
+        }
+
+        public function mudarNome(Categoria $nome, $id){
+            $sql = "UPDATE categorias SET nome = :novo_nome WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+
+            return $stmt->execute([
+                ':novo_nome' => $nome->getNome(),
+                ':id' => $id
             ]);
         }
 
