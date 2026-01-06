@@ -1,6 +1,5 @@
 <?php 
-    require_once __DIR__ . "/app/models/Despesa.php";
-    require_once __DIR__ . "/config/database.php";
+require_once __DIR__ . '/../models/Despesa.php';
 
         class DespesaDAO{
             private PDO $conn;

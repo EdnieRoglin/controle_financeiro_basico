@@ -19,12 +19,12 @@ require_once __DIR__ . "/../models/Categoria.php";
             ]);
         }
 
-        public function mudarNome(Categoria $nome, $id){
+        public function mudarNome(Categoria $novoNome, $id){
             $sql = "UPDATE categorias SET nome = :novo_nome WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
 
             return $stmt->execute([
-                ':novo_nome' => $nome->getNome(),
+                ':novo_nome' => $novoNome->getNome(),
                 ':id' => $id
             ]);
         }
@@ -37,7 +37,7 @@ require_once __DIR__ . "/../models/Categoria.php";
         }
 
         public function inativar(int $id){
-            $sql = "UPDATE cateorias SET = 0 WHERE id = :id";
+            $sql = "UPDATE categorias SET ativo = 0 WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
 
             return $stmt->execute([':id' => $id]);

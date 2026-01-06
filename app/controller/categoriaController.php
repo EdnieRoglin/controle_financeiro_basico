@@ -1,6 +1,5 @@
 <?php 
-    require_once __DIR__ . "/dao/CategoriaDAO.php";
-    require_once __DIR__ . "/models/Categoria.php";
+require_once __DIR__ . '/../dao/CategoriaDAO.php';
 
 class CategoriaController{
     private CategoriaDAO $categoriaDAO;
