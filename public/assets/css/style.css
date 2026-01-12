@@ -1,0 +1,14 @@
+body {
+    font-family: Arial;
+    margin: 20px;
+}
+
+.menu button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#conteudo {
+    margin-top: 20px;
+}

@@ -10,14 +10,14 @@ require_once __DIR__ . '/../models/Receita.php';
             }
 
             public function criar(Receita $receita){
-                $sql = "INSERT INTO receitas (nome, valor, dataReceita, recorrente, categoria_id)
-                VALUES (:nome, :valor, :dataRceita, :recorrente, :categoria_id)";
+                $sql = "INSERT INTO receitas (nome, valor, data_receita, recorrente, categoria_id)
+                VALUES (:nome, :valor, :data_receita, :recorrente, :categoria_id)";
                 $stmt = $this->conn->prepare($sql);
 
                 return $stmt->execute([
                     ':nome' => $receita->getNome(),
                     ':valor' => $receita->getValor(),
-                    ':dataReceita' => $receita->getDataReceita(),
+                    ':data_receita' => $receita->getDataReceita(),
                     ':recorrente' => $receita->getRecorrente(),
                     ':categoria_id' => $receita->getCategoriaId()
                 ]);

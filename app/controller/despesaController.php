@@ -2,53 +2,51 @@
 require_once __DIR__ . '/../dao/DespesaDAO.php';
 
     class DespesaController{
+        private CategoriaDAO $categoriaDao;
         private DespesaDAO $despesaDao;
 
-        public function __construct(PDO $conn){
-            $this->despesaDao = new DespesaDAO($conn);
+    public function __construct(PDO $conn) {
+        $this->categoriaDao = new CategoriaDAO($conn);
+        $this->despesaDao   = new DespesaDAO($conn);
+    }
+
+    public function criar($nome, $valor, $dataDespesa, $recorrente, $nomeCategoria){
+
+        $categoriaId = $this->categoriaDao->buscarId($nomeCategoria);
+
+        if (!$categoriaId) {
+            throw new Exception("Categoria '{$nomeCategoria}' não encontrada");
         }
 
-        public function criar($nome, $valor, $dataDespesa, $recorrente){
-            if(empty($nome)){
-                throw new Exception("O nome não pode estar vazio!");
-            }
+        $despesa = new Despesa(
+            no: $nome,
+            va: $valor,
+            de: $dataDespesa,
+            re: $recorrente,
+            categoriaId: $categoriaId
+        );
 
-            if(empty($valor)){
-                throw new Exception("O Valor deve ser um número válido!");
-            }
-
-            if(empty($dataDespesa)){
-                throw new Exception("Insira uma data válida!");
-            }
-
-            $despesa = new Despesa(
-                no: $nome,
-                va: $valor,
-                de: $dataDespesa,
-                re: $recorrente
-            );
-
-            return $this->despesaDao->criar($despesa);
-        }
+        return $this->despesaDao->criar($despesa);
+    }
 
         public function listarDespesas(){
-            $this->despesaDao->listarDespesas();
+            return $this->despesaDao->listarDespesas();
         }
 
         public function calcDespMesAtual(){
-            $this->despesaDao->calcDespMêsAtual();
+            return $this->despesaDao->calcDespMêsAtual();
         }
 
         public function DespCategoria(){
-            $this->despesaDao->DespCateoria();
+            return $this->despesaDao->DespCategoria();
         }
 
         public function listarRecorrentes(){
-            $this->despesaDao->listarRecorrentes();
+            return $this->despesaDao->listarRecorrentes();
         }
 
         public function listarIsoladas(){
-            $this->despesaDao->listarIsoladas();
+            return $this->despesaDao->listarIsoladas();
         }
     }
 ?>

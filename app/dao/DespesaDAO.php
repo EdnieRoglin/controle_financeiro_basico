@@ -9,18 +9,19 @@ require_once __DIR__ . '/../models/Despesa.php';
             }
 
             public function criar(Despesa $despesa){
-                $sql = "INSERT INTO despesas (nome, valor, dataDespesa, recorrente, categoria_id)
-                VALUES (:nome, :valor, :dataDespesa, :recorrente, :categoria_id)";
+                $sql = "INSERT INTO despesas (nome, valor, data_despesa, recorrente, categoria_id)
+                VALUES (:nome, :valor, :data_despesa, :recorrente, :categoria_id)";
                 $stmt = $this->conn->prepare($sql);
 
                 return $stmt->execute([
                     ':nome' => $despesa->getNome(),
                     ':valor' => $despesa->getValor(),
-                    ':dataDespesa' => $despesa->getDataDespesa(),
+                    ':data_despesa' => $despesa->getDataDespesa(),
                     ':recorrente' => $despesa->getRecorrente(),
                     ':categoria_id' => $despesa->getCategoriaId()
                 ]);
             }
+
 
             public function listarDespesas(){
                 $sql = "SELECT * FROM despesas";
@@ -30,18 +31,18 @@ require_once __DIR__ . '/../models/Despesa.php';
             }
 
             public function calcDespMêsAtual(){
-                $sql = "SELECT COALESCE(SUM(valor), 0) AS total_mes FROM despesas
-                WHERE data_despesa => DATA_FORMAT(CURDATE(), '%Y-%m-%01')
-                AND data_despesa < DATEADD(DATE_FORMAT(CURDATE(), '%Y-%m-%01') 
-                INTERVAL 1 MONTH)";
+                $sql = "SELECT COALESCE(SUM(valor), 0) AS total FROM despesas
+                    WHERE data_despesa >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+                    AND data_despesa <  DATE_ADD(
+                    DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH);";
                 $stmt = $this->conn->query($sql);
 
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
 
-            public function DespCateoria(){
-                $sql = "SELECT c.nome AS categoria, COALESCE(SUM(d.valor), 0)
-                AS total_gasto FROM cateoria c LEFT JOIN despesas d
+            public function DespCategoria(){
+                $sql = "SELECT c.nome AS categorias, COALESCE(SUM(d.valor), 0)
+                AS total_gasto FROM categorias c LEFT JOIN despesas d
                 ON d.categoria_id = c.id AND d.data_despesa >= DATE_FORMAT(CURDATE(), '%Y-%m-%01')
                 AND d.data_despesa < DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-%01'), INTERVAL 1 MONTH)
                 GROUP BY c.id, c.nome ORDER BY total_gasto DESC";

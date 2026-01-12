@@ -1,17 +1,18 @@
 <?php 
     class Despesa{
         private int $id;
-        private string $nome;
+        private string $nomeDespesa;
         private float $valor;
-        private int $dataDespesa;
+        private string $dataDespesa;
         private bool $recorrente;
-        private int $categoriaId;
+        private $categoriaId;
 
-        public function __construct(string $no, float $va, int $de, bool $re){
-            $this->nome = $no;
+        public function __construct(string $no, float $va, string $de, bool $re, $categoriaId){
+            $this->nomeDespesa = $no;
             $this->valor = $va;
             $this->dataDespesa = $de;
             $this->recorrente = $re;
+            $this->categoriaId = $categoriaId;
         }
 
         public function getId(){
@@ -19,7 +20,7 @@
         }
 
         public function getNome(){
-            return $this->nome;
+            return $this->nomeDespesa;
         }
 
         public function getValor(){
@@ -43,7 +44,7 @@
         }
 
         public function setNome($no){
-            $this->nome = $no;
+            $this->nomeDespesa = $no;
         }
 
         public function setValor($va){

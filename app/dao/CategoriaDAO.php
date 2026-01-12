@@ -29,6 +29,17 @@ require_once __DIR__ . "/../models/Categoria.php";
             ]);
         }
 
+        public function buscarId($nomeCategoria){
+            $sql = "SELECT id FROM categorias WHERE nome = :nome LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':nome' => $nomeCategoria]);
+
+            $id = $stmt->fetchColumn();
+
+            return $id !== false ? (int)$id : null;
+        }
+        
+
         public function listarAtivas(){
             $sql = "SELECT * FROM categorias WHERE ativo = 1";
             $stmt = $this->conn->query($sql);
@@ -36,11 +47,29 @@ require_once __DIR__ . "/../models/Categoria.php";
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function inativar(int $id){
-            $sql = "UPDATE categorias SET ativo = 0 WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);
+        public function listarInativas(){
+            $sql = "SELECT * FROM categorias WHERE ativo = 0";
+            $stmt = $this->conn->query($sql);
 
-            return $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function listarTodas(){
+            $sql = "SELECT * FROM categorias";
+            $stmt = $this->conn->query($sql);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function inativar($buscarNome){
+            $sql = "SELECT id FROM categorias WHERE nome = :nome LIMIT 1,
+            UPDATE categorias SET ativo = 0 WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':nome' => $buscarNome]);
+
+            $id = $stmt->fetchColumn();
+
+            return $id->execute([':id' => $buscarNome]);
         }
     }
 ?>

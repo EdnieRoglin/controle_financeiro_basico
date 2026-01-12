@@ -3,13 +3,15 @@ require_once __DIR__ . '/../dao/ReceitaDAO.php';
 
 
 class ReceitaController{
+    private CategoriaDAO $categoriaDao;
     private ReceitaDao $receitaDao;
 
-    public function __construct(PDO $conn){
-        $this->receitaDao = new ReceitaDao($conn);
+    public function __construct(PDO $conn) {
+        $this->categoriaDao = new CategoriaDAO($conn);
+        $this->receitaDao   = new ReceitaDAO($conn);
     }
 
-    public function criar($nome, $valor, $dataReceita, $recorrente){
+    public function criar($nome, $valor, $dataReceita, $recorrente, $nomeCategoria){
         if(empty($nome)){
             throw new Exception("O nome não pode estar vazio!");
         }
@@ -22,30 +24,36 @@ class ReceitaController{
             throw new Exception("Insira um data válida!");
         }
 
+        $categoriaId = $this->categoriaDao->buscarId($nomeCategoria);
+            if (!$categoriaId) {
+                throw new Exception("Categoria '{$nomeCategoria}' não encontrada");
+            }
+
         $receita = new Receita(
             no: $nome,
             va: $valor,
             da: $dataReceita,
-            re: $recorrente
+            re: $recorrente,
+            categoriaId: $categoriaId
         );
 
         return $this->receitaDao->criar($receita);
     }
 
     public function listarReceitas(){
-        $this->receitaDao->listarReceitas();
+        return $this->receitaDao->listarReceitas();
     }
 
     public function calcReceiMesAtual(){
-        $this->receitaDao->calcReceiMesAtual();
+        return $this->receitaDao->calcReceiMesAtual();
     }
 
     public function listarRecorrente(){
-        $this->receitaDao->listarRecorrentes();
+        return $this->receitaDao->listarRecorrentes();
     }
 
     public function listarIsoladas(){
-        $this->receitaDao->listarIsoladas();
+        return $this->receitaDao->listarIsoladas();
     }
 }
 ?>

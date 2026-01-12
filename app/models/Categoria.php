@@ -1,12 +1,12 @@
 <?php 
     class Categoria {
         private int $id;
-        private string $nome;
+        private string $nomeCategoria;
         private string $tipo;
         private bool $ativo;
 
-        public function __construct(string $no, string $ti, bool $at){
-            $this->nome = $no;
+        public function __construct(string $no, string $ti){
+            $this->nomeCategoria = $no;
             $this->tipo = $ti;
             $this->setAtivo(true);
         }
@@ -20,7 +20,7 @@
         }
 
         public function getNome(){
-            return $this->nome;
+            return $this->nomeCategoria;
         }
 
         public function getTipo(){
@@ -32,7 +32,7 @@
         }
 
         public function setNome($no){
-            $this->nome = $no;
+            $this->nomeCategoria = $no;
         }
 
         public function setAtivo($at){

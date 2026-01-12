@@ -1,17 +1,18 @@
 <?php 
     class Receita{
         private int $id;
-        private string $nome;
+        private string $nomeReceita;
         private float $valor;
-        private int $dataReceita;
+        private string $dataReceita;
         private bool $recorrente;
         private int $categoriaId;
 
-        public function __construct(string $no, float $va, int $da, bool $re){
-            $this->nome = $no;
+        public function __construct(string $no, float $va, string $da, bool $re, int $categoriaId){
+            $this->nomeReceita = $no;
             $this->valor = $va;
             $this->dataReceita = $da;
             $this->recorrente = $re;
+            $this->categoriaId = $categoriaId;
         }
 
         public function getId(){
@@ -19,7 +20,7 @@
         }
 
         public function getNome(){
-            return $this->nome;
+            return $this->nomeReceita;
         }
 
         public function getValor(){
@@ -43,7 +44,7 @@
         }
 
         public function setNome($no){
-            $this->nome = $no;
+            $this->nomeReceita = $no;
         }
 
         public function setValor($va){
