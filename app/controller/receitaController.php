@@ -44,6 +44,10 @@ class ReceitaController{
         return $this->receitaDao->listarReceitas();
     }
 
+    public function receiCategoria(){
+        return $this->receitaDao->receiCategoria();
+    }
+
     public function calcReceiMesAtual(){
         return $this->receitaDao->calcReceiMesAtual();
     }

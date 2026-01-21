@@ -31,10 +31,10 @@ require_once __DIR__ . '/../models/Receita.php';
             }
 
             public function calcReceiMesAtual(){
-                $sql = "SELECT COALESCE(SUM(valor), 0) AS total_mes FROM receitas
-                WHERE data_receita => DATA_FORMAT(CURDATE(), '%Y-%m-%01')
-                AND data_receita < DATEADD(DATE_FORMAT(CURDATE(), '%Y-%m-%01') 
-                INTERVAL 1 MONTH)";
+                $sql = "SELECT COALESCE(SUM(valor), 0) AS total FROM receitas
+                    WHERE data_receita >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+                    AND data_receita <  DATE_ADD(
+                    DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH);";
                 $stmt = $this->conn->query($sql);
 
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ require_once __DIR__ . '/../models/Receita.php';
             }
 
             public function receiCategoria(){
-                $sql = "SELECT c.nome AS categoria, COALESCE(SUM(r.valor), 0)
+                $sql = "SELECT c.nome AS receitas, COALESCE(SUM(r.valor), 0)
                 AS total_receita FROM categorias c LEFT JOIN receitas r 
                 ON r.categoria_id = c.id AND r.data_receita >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
                 AND r.data_receita <  DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH)

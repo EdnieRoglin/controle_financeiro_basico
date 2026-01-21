@@ -31,16 +31,43 @@ $categoriaController = new CategoriaController($conn);
 $receitaController   = new ReceitaController($conn);
 $despesaController   = new DespesaController($conn);
 
+header('Location: views/dashboard.php');
+exit;
+
 //$despesaController->criar("Água", 60.00, "2026-01-10", true, 'Água');
-$a = $despesaController->listarDespesas();
-$b = $despesaController->calcDespMesAtual();
-$c = $despesaController->DespCategoria();
+//$a = $despesaController->listarDespesas();
+//$b = $despesaController->calcDespMesAtual();
+//$c = $despesaController->DespCategoria();
+//$d = $despesaController->listarRecorrentes();
+//$e = $despesaController->listarIsoladas();
+
+//$receitaController->criar("Salário", 5000.00, "2024-06-05", false, 'Salário');
+
+//$f = $receitaController->listarReceitas();
+//$g = $receitaController->calcReceiMesAtual();
+//$h = $receitaController->receiCategoria();
+//$i = $receitaController->listarRecorrente();
+//$j = $receitaController->listarIsoladas();
+
 
 echo "<pre>";
-    print_r($a);
-echo "br";
-    print_r($b);
-echo "br";
-    print_r($c);
-echo "</pre>";
+    //print_r($a);
+echo "<pre>";
+    //print_r($b);
+echo "<pre>";
+    //print_r($c);
+echo "<pre>";
+    //print_r($d);
+echo "<pre>";
+    //print_r($e);
+echo "<pre>";
+
+
+echo "<pre>";
+    //print_r($f);
+    //print_r($g);
+    //print_r($h);
+    //print_r($i);
+    //print_r($j);
+echo "<pre>";
 ?>
