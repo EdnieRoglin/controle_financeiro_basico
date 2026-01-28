@@ -1,0 +1,332 @@
+/* =====================================================
+   1. VARIÁVEIS GLOBAIS (CORES, FONTES, TEMA)
+===================================================== */
+
+:root {
+  --primary: #135bec;
+  --bg-light: #f6f6f8;
+  --bg-dark: #101622;
+  --card-light: #ffffff;
+  --card-dark: #1c2331;
+  --border-light: #e5e7eb;
+  --border-dark: #2d3648;
+  --text-light: #0f172a;
+  --text-dark: #f8fafc;
+  --success: #22c55e;
+  --info: #3b82f6;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+.dark body {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* =====================================================
+   2. ÁREA PRINCIPAL (CONTEÚDO)
+===================================================== */
+.main-content {
+  min-height: 100vh;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   3. CARDS DE RESUMO
+===================================================== */
+.card {
+  background: var(--card-light);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.dark .card {
+  background: var(--card-dark);
+  border-color: var(--border-dark);
+}
+
+.card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: .5rem;
+}
+
+.card-growth {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-top: .5rem;
+}
+
+/* =====================================================
+   4. BOTÕES E FILTROS
+===================================================== */
+.button {
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: .75rem 1.5rem;
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+.button-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(19,91,236,.25);
+}
+
+.button-primary:hover {
+  opacity: .9;
+}
+
+.button-outline {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: inherit;
+}
+
+.filter-group {
+  display: flex;
+  background: var(--card-light);
+  border-radius: 8px;
+  padding: .25rem;
+  border: 1px solid var(--border-light);
+}
+
+.dark .filter-group {
+  background: var(--card-dark);
+  border-color: var(--border-dark);
+}
+
+.filter-group button {
+  background: none;
+  border: none;
+  padding: .5rem 1rem;
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.filter-group .active {
+  background: #e5e7eb;
+}
+
+.dark .filter-group .active {
+  background: #1e293b;
+}
+
+/* =====================================================
+   5. TABELA DE RECEITAS
+===================================================== */
+.table-container {
+  background: var(--card-light);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.dark .table-container {
+  background: var(--card-dark);
+  border-color: var(--border-dark);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f1f5f9;
+}
+
+.dark thead {
+  background: rgba(30,41,59,.6);
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+  font-size: .7rem;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+td {
+  padding: 1rem;
+  font-size: .85rem;
+}
+
+tbody tr:hover {
+  background: rgba(0,0,0,.03);
+}
+
+.dark tbody tr:hover {
+  background: rgba(255,255,255,.05);
+}
+
+/* =====================================================
+   6. BADGES (STATUS)
+===================================================== */
+.badge {
+  display: inline-block;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  font-size: .6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.badge-info {
+  background: rgba(59,130,246,.15);
+  color: var(--info);
+  border-color: rgba(59,130,246,.4);
+}
+
+.badge-neutral {
+  background: rgba(148,163,184,.15);
+  color: #64748b;
+  border-color: rgba(148,163,184,.4);
+}
+
+/* =====================================================
+   7. MODAL (NOVA RECEITA)
+===================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+}
+
+.modal.active {
+  display: block;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15,23,42,.8);
+  backdrop-filter: blur(4px);
+}
+
+.modal-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 420px;
+  background: var(--card-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.dark .modal-panel {
+  background: var(--card-dark);
+}
+
+.modal-header,
+.modal-footer {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.dark .modal-header,
+.dark .modal-footer {
+  border-color: var(--border-dark);
+}
+
+.modal-body {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* =====================================================
+   8. INPUTS E FORMULÁRIOS
+===================================================== */
+label {
+  font-size: .75rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: .4rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: .65rem .8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  font-size: .85rem;
+  background: #f8fafc;
+}
+
+.dark input,
+.dark select {
+  background: #0f172a;
+  border-color: var(--border-dark);
+  color: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* =====================================================
+   9. TOGGLE (RECORRENTE)
+===================================================== */
+.toggle {
+  width: 44px;
+  height: 24px;
+  background: #cbd5f5;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: .3s;
+}
+
+.toggle.active {
+  background: var(--primary);
+}
+
+.toggle.active::after {
+  transform: translateX(20px);
+}

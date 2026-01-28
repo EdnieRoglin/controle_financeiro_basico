@@ -1,12 +1,8 @@
 <?php 
-require_once __DIR__ . '/../dao/CategoriaDAO.php';
+require_once __DIR__ . '/../Data/CategoriaDAO.php';
 
 class CategoriaController{
     private CategoriaDAO $categoriaDAO;
-
-    public function __construct(PDO $conn) {
-        $this->categoriaDAO = new CategoriaDAO($conn);
-    }
 
     public function criar($nome, $tipo){
         if(empty($nome)){

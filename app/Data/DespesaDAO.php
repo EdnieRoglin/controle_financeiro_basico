@@ -37,7 +37,8 @@ require_once __DIR__ . '/../models/Despesa.php';
                     DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH);";
                 $stmt = $this->conn->query($sql);
 
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+                return (float) ($resultado['total'] ?? 0);
             }
 
             public function DespCategoria(){

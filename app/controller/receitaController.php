@@ -1,14 +1,13 @@
 <?php 
-require_once __DIR__ . '/../dao/ReceitaDAO.php';
-
+require_once __DIR__ . '/../Data/ReceitaDAO.php';
 
 class ReceitaController{
     private CategoriaDAO $categoriaDao;
     private ReceitaDao $receitaDao;
 
-    public function __construct(PDO $conn) {
-        $this->categoriaDao = new CategoriaDAO($conn);
-        $this->receitaDao   = new ReceitaDAO($conn);
+    public function __construct()
+    {
+        $this->receitaDao = new ReceitaDao(Database::conectar());
     }
 
     public function criar($nome, $valor, $dataReceita, $recorrente, $nomeCategoria){
@@ -58,6 +57,13 @@ class ReceitaController{
 
     public function listarIsoladas(){
         return $this->receitaDao->listarIsoladas();
+    }
+
+    public function index(){
+
+        $totalReceitas = $this->receitaDao->calcReceiMesAtual();
+        $receitas = $this->receitaDao->listarReceitas();
+        require_once __DIR__ . '/../public/views/receita.php';
     }
 }
 ?>
