@@ -21,10 +21,10 @@ switch ($page) {
         break;
 
     case 'categoria':
-        
+        (new CategoriaController())->index();
         break;
 
     default:
         echo "Página não encontrada";
 }
-$r[0] = new ReceitaController;
+

@@ -44,21 +44,22 @@ require_once __DIR__ . "/../models/Categoria.php";
             $sql = "SELECT * FROM categorias WHERE ativo = 1";
             $stmt = $this->conn->query($sql);
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         public function listarInativas(){
             $sql = "SELECT * FROM categorias WHERE ativo = 0";
             $stmt = $this->conn->query($sql);
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         public function listarTodas(){
             $sql = "SELECT * FROM categorias";
             $stmt = $this->conn->query($sql);
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $categorias = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ($categorias['nome']);
         }
 
         public function inativar($buscarNome){

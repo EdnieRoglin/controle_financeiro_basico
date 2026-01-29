@@ -35,7 +35,7 @@
   onclick="document.getElementById('modal-receita').classList.remove('hidden')"
   class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm">
   <span class="material-symbols-outlined">add</span>
-  Nova Receita
+  Nova Despesa
 </button>
 </div>
 </div>

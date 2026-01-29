@@ -1,8 +1,14 @@
 <?php 
 require_once __DIR__ . '/../Data/CategoriaDAO.php';
+require_once __DIR__ . '/../Data/DespesaDAO.php';
+require_once __DIR__ . '/../Data/ReceitaDAO.php';
 
 class CategoriaController{
     private CategoriaDAO $categoriaDAO;
+
+    public function __construct(){
+        $this->categoriaDAO = new CategoriaDAO(Database::conectar());
+    }
 
     public function criar($nome, $tipo){
         if(empty($nome)){
@@ -61,6 +67,12 @@ class CategoriaController{
         }
 
         return $this->categoriaDAO->inativar($id);
+    }
+
+    public function index(){
+        $categorias = $this->categoriaDAO->listarTodas();
+
+        require_once __DIR__ . '/../public/views/categoria.php';
     }
 }
     
